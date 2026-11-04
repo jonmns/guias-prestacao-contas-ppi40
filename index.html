@@ -2,52 +2,98 @@
 <html lang="pt-BR">
 <head>
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>Guias de Prestação de Contas PPI 4.0</title>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Lato:wght@400;700;900&display=swap">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Lato:wght@400;700;900&family=IBM+Plex+Mono:wght@500&display=swap">
 <style>
-:root{--bg:#F5F8FB;--surface:#FFFFFF;--line:#D6E1EC;--ink:#13263C;--muted:#56697F;--accent:#1E7FC2;--accent-ink:#0F2A4A;color-scheme:light}
-@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){--bg:#0B1724;--surface:#112234;--line:#24405C;--ink:#E4ECF4;--muted:#9DB0C4;--accent:#5DB2EA;--accent-ink:#CFE6F8;color-scheme:dark}}
-:root[data-theme="dark"]{--bg:#0B1724;--surface:#112234;--line:#24405C;--ink:#E4ECF4;--muted:#9DB0C4;--accent:#5DB2EA;--accent-ink:#CFE6F8;color-scheme:dark}
+/* Página inicial: faixa institucional + três cartões de escolha */
+:root{--bg:#F5F8FB;--surface:#FFFFFF;--surface-2:#EDF3F9;--line:#D6E1EC;--ink:#13263C;--muted:#56697F;--accent:#1E7FC2;--accent-ink:#0F2A4A;--f-body:"Lato","Calibri","Segoe UI",Arial,sans-serif;--f-mono:"IBM Plex Mono",ui-monospace,Consolas,monospace;color-scheme:light}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){--bg:#0B1724;--surface:#112234;--surface-2:#172C42;--line:#24405C;--ink:#E4ECF4;--muted:#9DB0C4;--accent:#5DB2EA;--accent-ink:#CFE6F8;color-scheme:dark}}
+:root[data-theme="dark"]{--bg:#0B1724;--surface:#112234;--surface-2:#172C42;--line:#24405C;--ink:#E4ECF4;--muted:#9DB0C4;--accent:#5DB2EA;--accent-ink:#CFE6F8;color-scheme:dark}
 *{box-sizing:border-box}
-body{margin:0;background:var(--bg);color:var(--ink);font-family:"Lato","Calibri","Segoe UI",Arial,sans-serif;line-height:1.6}
-.band{background:linear-gradient(120deg,#0B2240 0%,#0F2A4A 38%,#1E7FC2 82%,#3FA9E0 100%);color:#fff}
-.wrap{max-width:1040px;margin:0 auto;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
-.band .wrap{padding-block:48px 56px}
+html,body{min-height:100%}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--f-body);line-height:1.6}
+.wrap{max-width:1120px;margin:0 auto;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+.band{position:relative;background:linear-gradient(120deg,#0B2240 0%,#0F2A4A 38%,#1E7FC2 82%,#3FA9E0 100%);color:#fff;overflow:hidden}
+.band .wrap{padding-block:calc(env(safe-area-inset-top,0px) + 48px) 96px;position:relative;z-index:1}
+.band svg.wave{position:absolute;left:0;right:0;bottom:-1px;width:100%;height:80px;display:block}
 .eyebrow{font-size:.75rem;letter-spacing:.12em;text-transform:uppercase;font-weight:700;color:#9FD3F5}
-h1{font-size:clamp(1.8rem,4vw,2.6rem);font-weight:900;line-height:1.15;margin:8px 0 12px;text-wrap:balance}
-.band p{color:#DCEBF7;max-width:62ch;margin:0}
-main.wrap{padding-block:32px 72px;display:grid;gap:16px}
-.card{display:grid;grid-template-columns:56px minmax(0,1fr) auto;gap:16px;align-items:center;background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:18px 20px;text-decoration:none;color:inherit}
-.card:hover,.card:focus-visible{border-color:var(--accent);outline:none;box-shadow:0 0 0 3px color-mix(in srgb,var(--accent) 25%,transparent)}
-.n{width:48px;height:48px;border-radius:10px;background:var(--accent-ink);color:var(--surface);display:grid;place-items:center;font-weight:900;font-size:1.1rem}
-.card h2{margin:0;font-size:1.15rem;color:var(--accent-ink)}
-.card p{margin:4px 0 0;color:var(--muted);font-size:.92rem}
-.go{font-weight:700;color:var(--accent);white-space:nowrap}
-.note{color:var(--muted);font-size:.85rem;max-width:72ch}
-.theme-btn{position:fixed;right:calc(16px + env(safe-area-inset-right,0px));bottom:calc(16px + env(safe-area-inset-bottom,0px));font:700 .84rem inherit;font-family:inherit;background:var(--accent-ink);color:var(--surface);border:1px solid var(--line);border-radius:999px;padding:9px 14px;cursor:pointer}
-@media (max-width:640px){.card{grid-template-columns:48px minmax(0,1fr)}.go{grid-column:2}}
+h1{font-size:clamp(1.9rem,4.4vw,2.9rem);font-weight:900;line-height:1.12;margin:10px 0 14px;letter-spacing:-.01em;text-wrap:balance;max-width:22ch}
+.band p{color:#DCEBF7;max-width:60ch;margin:0;font-size:1.05rem}
+main.wrap{padding-block:8px 96px;display:flex;flex-direction:column;gap:22px}
+.ask{display:flex;flex-direction:column;gap:4px}
+.ask h2{margin:0;font-size:1.5rem;font-weight:900;color:var(--accent-ink);text-wrap:balance}
+.ask p{margin:0;color:var(--muted)}
+.choices{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:18px}
+.choice{position:relative;display:flex;flex-direction:column;gap:12px;background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:22px 22px 20px;text-decoration:none;color:inherit;transition:transform .15s ease,border-color .15s ease,box-shadow .15s ease;min-width:0}
+.choice::before{content:"";position:absolute;inset:0 0 auto 0;height:5px;border-radius:14px 14px 0 0;background:var(--tone)}
+.choice:hover,.choice:focus-visible{transform:translateY(-3px);border-color:var(--tone);box-shadow:0 10px 28px rgba(6,16,28,.14);outline:none}
+.num{font-family:var(--f-mono);font-size:.78rem;font-weight:500;color:var(--tone)}
+.choice h3{margin:0;font-size:1.3rem;line-height:1.25;color:var(--accent-ink)}
+.choice p{margin:0;color:var(--muted);font-size:.92rem;flex:1}
+.choice ul{margin:0;padding:0;list-style:none;display:flex;flex-wrap:wrap;gap:6px}
+.choice li{font-size:.72rem;font-weight:700;background:var(--surface-2);color:var(--accent-ink);border-radius:999px;padding:3px 9px}
+.go{display:inline-flex;align-items:center;justify-content:center;gap:8px;margin-top:6px;background:var(--tone);color:#fff;border-radius:10px;padding:11px 14px;font-weight:900;font-size:.95rem}
+.go svg{width:16px;height:16px}
+.c1{--tone:#1E7FC2}.c2{--tone:#1F8A73}.c3{--tone:#6741D9}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]) .c1{--tone:#3A93D4}:root:not([data-theme="light"]) .c2{--tone:#2E9C83}:root:not([data-theme="light"]) .c3{--tone:#7F5BEA}}
+:root[data-theme="dark"] .c1{--tone:#3A93D4}:root[data-theme="dark"] .c2{--tone:#2E9C83}:root[data-theme="dark"] .c3{--tone:#7F5BEA}
+.note{color:var(--muted);font-size:.85rem;max-width:72ch;margin:0}
+.theme-btn{position:fixed;z-index:40;right:calc(16px + env(safe-area-inset-right,0px));bottom:calc(16px + env(safe-area-inset-bottom,0px));display:inline-flex;align-items:center;gap:8px;font:700 .84rem var(--f-body);background:var(--accent-ink);color:var(--surface);border:1px solid var(--line);border-radius:999px;padding:9px 14px;cursor:pointer;box-shadow:0 4px 16px rgba(6,16,28,.25)}
+.theme-btn:focus-visible{outline:3px solid var(--accent);outline-offset:2px}
+@media (max-width:900px){.choices{grid-template-columns:minmax(0,1fr)}}
+@media (prefers-reduced-motion: reduce){.choice{transition:none}.choice:hover{transform:none}}
 </style>
 </head>
 <body>
-<header class="band"><div class="wrap">
-<div class="eyebrow">Programa Prioritário Indústria 4.0 · Prestação de contas</div>
-<h1>Guias para analistas de P&amp;D de instituições executoras</h1>
-<p>Três materiais de referência sobre a rotina de prestação de contas de projetos PPI 4.0 coordenados pelo CITS, as ferramentas usadas no fechamento mensal e a base normativa de PD&amp;I.</p>
-</div></header>
+<header class="band">
+  <div class="wrap">
+    <div class="eyebrow">Programa Prioritário Indústria 4.0 · Prestação de contas</div>
+    <h1>Guias do analista de P&amp;D para projetos PPI 4.0</h1>
+    <p>Material de apoio para a rotina de prestação de contas de instituições executoras de projetos coordenados pelo CITS.</p>
+  </div>
+  <svg class="wave" viewBox="0 0 1440 80" preserveAspectRatio="none" aria-hidden="true"><path d="M0,36 C320,85 620,0 960,34 C1180,56 1320,40 1440,26 L1440,80 L0,80 Z" fill="rgba(255,255,255,.18)"/><path d="M0,56 C300,90 660,20 980,52 C1200,74 1340,58 1440,50 L1440,80 L0,80 Z" style="fill:var(--bg)"/></svg>
+</header>
 <main class="wrap">
-<a class="card" href="guias/guia-prestacao-de-contas.html"><span class="n">1</span><div><h2>Guia de prestação de contas</h2><p>Rotina do analista, obrigações, dependências entre áreas, fluxogramas, SIPOC, RACI, jornada e fluxo end-to-end.</p></div><span class="go">Abrir →</span></a>
-<a class="card" href="guias/manual-das-ferramentas.html"><span class="n">2</span><div><h2>Manual das ferramentas</h2><p>Planilha Financeira, Indicadores Gerenciais e Relatório Técnico: preenchimento, prints anotados, leitura dos indicadores e checklist mensal.</p></div><span class="go">Abrir →</span></a>
-<a class="card" href="guias/base-normativa-pdi.html"><span class="n">3</span><div><h2>Base normativa de PD&amp;I</h2><p>Leis, decretos, resoluções, portarias e manuais do PPI 4.0 e do convênio direto, com links para o texto oficial.</p></div><span class="go">Abrir →</span></a>
-<p class="note">Material de apoio. Itens marcados como premissa ou lacuna devem ser validados com a coordenadora e com o instrumento de cada projeto. Este conteúdo não substitui parecer jurídico.</p>
+  <div class="ask">
+    <h2>Qual manual você quer ver?</h2>
+    <p>Clique em um dos cartões para abrir o manual. Em todos eles há um botão para voltar a esta página.</p>
+  </div>
+  <nav class="choices" aria-label="Escolha do manual">
+    <a class="choice c1" href="guias/guia-prestacao-de-contas.html">
+      <span class="num">MANUAL 1</span>
+      <h3>Guia de prestação de contas</h3>
+      <p>A rotina completa do analista: o que entregar, quando, para quem e com quais dependências entre áreas.</p>
+      <ul><li>Rotina</li><li>Obrigações</li><li>Fluxogramas</li><li>RACI</li><li>Jornada</li></ul>
+      <span class="go">Abrir guia <svg viewBox="0 0 16 16" aria-hidden="true"><path d="M3 8h10M9 4l4 4-4 4" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+    </a>
+    <a class="choice c2" href="guias/manual-das-ferramentas.html">
+      <span class="num">MANUAL 2</span>
+      <h3>Manual das ferramentas</h3>
+      <p>Como preencher e conectar a Planilha Financeira, os Indicadores Gerenciais e o Relatório Técnico, com prints anotados dos modelos.</p>
+      <ul><li>Planilha</li><li>Indicadores</li><li>Relatório</li><li>Checklist</li></ul>
+      <span class="go">Abrir manual <svg viewBox="0 0 16 16" aria-hidden="true"><path d="M3 8h10M9 4l4 4-4 4" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+    </a>
+    <a class="choice c3" href="guias/base-normativa-pdi.html">
+      <span class="num">MANUAL 3</span>
+      <h3>Base normativa de PD&amp;I</h3>
+      <p>Leis, decretos, resoluções, portarias e manuais do PPI 4.0 e do convênio direto, com acesso ao texto oficial de cada norma.</p>
+      <ul><li>Leis</li><li>Resoluções CAPDA</li><li>Portarias</li><li>Manuais</li></ul>
+      <span class="go">Abrir base normativa <svg viewBox="0 0 16 16" aria-hidden="true"><path d="M3 8h10M9 4l4 4-4 4" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+    </a>
+  </nav>
+  <p class="note">Itens marcados nos manuais como premissa ou lacuna devem ser validados com a coordenadora e com o instrumento de cada projeto. Este material não substitui parecer jurídico.</p>
 </main>
-<button type="button" class="theme-btn" id="tb">Modo escuro</button>
+<button type="button" class="theme-btn" id="tb" aria-label="Alternar entre modo claro e escuro">Modo escuro</button>
 <script>
 (function(){var K='ppi40-guia-tema',r=document.documentElement,b=document.getElementById('tb'),mq=window.matchMedia&&matchMedia('(prefers-color-scheme: dark)');
 function cur(){return r.getAttribute('data-theme')||(mq&&mq.matches?'dark':'light');}
 function paint(){b.textContent=cur()==='dark'?'Modo claro':'Modo escuro';}
-try{var s=localStorage.getItem(K);if(s)r.setAttribute('data-theme',s);}catch(e){}
-b.onclick=function(){var n=cur()==='dark'?'light':'dark';r.setAttribute('data-theme',n);try{localStorage.setItem(K,n);}catch(e){}paint();};paint();})();
+try{var s=localStorage.getItem(K);if(s==='dark'||s==='light')r.setAttribute('data-theme',s);}catch(e){}
+b.addEventListener('click',function(){var n=cur()==='dark'?'light':'dark';r.setAttribute('data-theme',n);try{localStorage.setItem(K,n);}catch(e){}paint();});
+if(mq&&mq.addEventListener)mq.addEventListener('change',paint);paint();})();
 </script>
 </body>
 </html>
