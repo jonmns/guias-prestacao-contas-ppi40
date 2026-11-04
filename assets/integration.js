@@ -8,6 +8,15 @@ var manual=location.pathname.endsWith('/guia-prestacao-de-contas.html')?'guia':l
 function portalState(){try{var state=JSON.parse(localStorage.getItem('ppi40-portal-v1')||'{}');state.s=state.s||{};state.f=state.f||{};return state;}catch{return {s:{},f:{}};}}
 document.querySelectorAll('section.sec[id]').forEach(sec=>{var header=sec.querySelector(':scope > header');if(!header)return;var row=document.createElement('div');row.className='ppi-section-tools';var fav=document.createElement('button'),done=document.createElement('button');fav.type=done.type='button';fav.className=done.className='btn sm';var key=manual+'#'+sec.id;function paint(){var st=portalState();fav.textContent=st.f[key]?'Remover favorito':'Favoritar';fav.setAttribute('aria-pressed',String(!!st.f[key]));done.textContent=st.s['sec:'+key]?'Seção estudada':'Marcar seção como estudada';done.setAttribute('aria-pressed',String(!!st.s['sec:'+key]));}function save(st){try{localStorage.setItem('ppi40-portal-v1',JSON.stringify(st));}catch{var msg=document.createElement('span');msg.setAttribute('role','status');msg.textContent='O navegador não permitiu salvar a marcação.';row.append(msg);}paint();}fav.onclick=()=>{var st=portalState();if(st.f[key])delete st.f[key];else st.f[key]={t:sec.querySelector('h2')?.textContent||sec.id,u:'guias/'+location.pathname.split('/').pop()+'#'+sec.id,m:manual};save(st);};done.onclick=()=>{var st=portalState();if(st.s['sec:'+key])delete st.s['sec:'+key];else st.s['sec:'+key]=1;save(st);};row.append(fav,done);header.after(row);paint();});
 }
+// Mostrar ferramentas avançadas somente quando solicitadas.
+requestAnimationFrame(function(){
+ document.querySelectorAll('.ppi-enhance').forEach(function(panel){
+  if(panel.closest('.ppi-enhance .ppi-enhance')||panel.parentElement.closest('.ppi-enhance')||panel.id==='diagnostico'||panel.querySelector('#alert-level')||!location.pathname.includes('/guias/'))return;
+  var heading=panel.querySelector(':scope > h3');if(!heading)return;
+  var box=document.createElement('details'),summary=document.createElement('summary');
+  box.className='ppi-optional';summary.textContent=heading.textContent;box.append(summary);panel.before(box);box.append(panel);heading.hidden=true;
+ });
+});
 if(!location.pathname.endsWith('/meu-espaco.html'))return;
 var main=document.querySelector('main'),section=document.createElement('section');section.className='ppi-enhance';section.innerHTML='<h2>Estudo nos manuais</h2><p>Os manuais mantêm registros próprios neste navegador. Este painel reúne os indicadores sem alterar os critérios de conclusão de cada trilha.</p><div id="manual-progress"></div><h3>Cópia de segurança completa</h3><p>Inclui progresso, preferências, favoritos e checklists dos três manuais e do portal.</p><button type="button" id="backup-all">Exportar tudo em JSON</button> <label>Restaurar cópia completa <input type="file" id="restore-all" accept="application/json,.json"></label><p id="backup-status" role="status"></p>';main.append(section);
 function read(k){try{return JSON.parse(localStorage.getItem(k)||'{}')||{};}catch{return {};}}

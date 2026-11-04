@@ -86,12 +86,11 @@ def header_html(base, active=None):
         f'<header class="ph"><div class="ph-in">'
         f'<a class="brand" href="{base}index.html" aria-label="{SITE}, página inicial">{LOGO}<span><small>Guias do analista de P&amp;D</small><b>{SITE}</b></span></a>'
         f'<nav class="pnav" id="p-nav" aria-label="Navegação principal">'
-        f'<a href="{base}aprender.html" data-nav="aprender"{cur("aprender")}>Quero aprender</a>'
-        f'<a href="{base}consultar.html" data-nav="consultar"{cur("consultar")}>Preciso consultar</a>'
+        f'<a href="{base}aprender.html" data-nav="aprender"{cur("aprender")}>Aprender</a>'
+        f'<a href="{base}consultar.html" data-nav="consultar"{cur("consultar")}>Consultar</a>'
         f'<div class="dd"><button type="button" class="dd-b{" is-here" if active == "manuais" else ""}" aria-expanded="false" aria-controls="p-dd" data-nav="manuais">Manuais {svg("chev")}</button>'
         f'<div class="dd-m" id="p-dd">{mm}</div></div>'
         f'<a href="{base}checklists.html" data-nav="checklists"{cur("checklists")}>Checklists</a>'
-        f'<a href="{base}glossario.html" data-nav="glossario"{cur("glossario")}>Glossário</a>'
         f'<a href="{base}meu-espaco.html" data-nav="meu"{cur("meu")}>Meu espaço</a>'
         f'</nav>'
         f'<div class="psearch" id="p-search"><form role="search" action="{base}consultar.html" method="get">{svg("search")}'
@@ -116,17 +115,11 @@ def crumbs_html(items):
 
 
 def footer_html(base):
-    return (
-        f'<footer class="pf"><div class="wrap">'
-        f'<div><h2>{SITE}</h2><p>Materiais de referência para analistas de P&amp;D de instituições executoras de projetos do Programa Prioritário de Indústria 4.0 e Modernização Industrial (PPI 4.0), coordenado pelo CITS.</p>'
-        f'<p class="storage-warn" role="status">O armazenamento local do navegador está indisponível. Progresso, favoritos e preferências valem só enquanto esta página estiver aberta.</p></div>'
-        f'<div><h2>Navegar</h2><ul><li><a href="{base}aprender.html">Quero aprender</a></li><li><a href="{base}consultar.html">Preciso consultar</a></li>'
-        f'<li><a href="{base}checklists.html">Checklists operacionais</a></li><li><a href="{base}glossario.html">Glossário</a></li><li><a href="{base}meu-espaco.html">Meu espaço</a></li></ul></div>'
-        f'<div><h2>Manuais</h2><ul>'
-        + ''.join(f'<li><a href="{base}{MANUALS[k]["file"]}">{esc(MANUALS[k]["title"])}</a></li>' for k in ORDER)
-        + f'</ul></div>'
-        f'<p class="legal">Itens marcados como premissa ou lacuna exigem validação com a coordenação e com os instrumentos de cada projeto. Os links normativos apontam para Planalto, Diário Oficial da União e Suframa: confira o texto oficial antes de citá-lo em documento. Este material não substitui parecer jurídico.</p>'
-        f'</div></footer>')
+    return (f'<footer class="pf"><div class="wrap"><div><h2>{SITE}</h2><p>Guias de apoio ao analista de P&amp;D.</p>'
+            f'<p class="storage-warn" role="status">O navegador não permite salvar o progresso.</p></div>'
+            f'<div><h2>Apoio</h2><ul><li><a href="{base}glossario.html">Glossário</a></li>'
+            f'<li><a href="{base}meu-espaco.html">Progresso e favoritos</a></li></ul></div>'
+            f'<p class="legal">Valide premissas e lacunas com a coordenação. Confira as normas na fonte oficial. Este material não substitui parecer jurídico.</p></div></footer>')
 
 
 THEME_BOOT = ("<script>(function(){var d=document.documentElement;d.classList.add('js');try{var s=localStorage.getItem('ppi40-guia-tema');"
@@ -172,99 +165,20 @@ def wcount(h):
 
 # ------------------------------------------------------------------ página inicial
 def page_index(ctx):
-    mins = {m: minutes(ctx.words[m]) for m in ORDER}
-    cards = [
-        dict(k='guia', cls='c-m1', ico='route', level='Introdutório',
-             desc='A rotina completa do analista: o que entregar, quando, para quem e com quais dependências entre áreas.',
-             chips=['Rotina', 'Obrigações', 'Fluxogramas', 'RACI', 'Jornada', 'Riscos']),
-        dict(k='ferramentas', cls='c-m2', ico='grid', level='Intermediário a avançado',
-             desc='Como preencher e conectar a Planilha Financeira, os Indicadores Gerenciais e o Relatório Técnico, com prints anotados dos modelos.',
-             chips=['Planilha Financeira', 'Indicadores', 'Relatório Técnico', 'Checklist', 'Rastreabilidade']),
-        dict(k='normativa', cls='c-m3', ico='scale', level='Referência para consulta',
-             desc='Leis, decretos, resoluções, portarias e manuais do PPI 4.0 e do convênio direto, com acesso ao texto oficial de cada norma.',
-             chips=['Leis', 'Resoluções CAPDA', 'Portarias', 'Manuais']),
-    ]
-    mcards = ''
-    for c in cards:
-        m = MANUALS[c['k']]
-        mcards += (
-            f'<article class="card tone {c["cls"]}"><div class="ico">{svg(c["ico"])}</div>'
-            f'<span class="eyebrow muted">Manual {m["n"]}</span><h3><a href="{m["file"]}" style="color:inherit;text-decoration:none">{esc(m["title"])}</a></h3>'
-            f'<p>{esc(c["desc"])}</p>'
-            f'<ul class="chips" style="list-style:none;margin:0;padding:0">{"".join(f"<li class=chip>{esc(x)}</li>" for x in c["chips"])}</ul>'
-            f'<div class="meta"><span>Complexidade: <b>{c["level"]}</b></span><span>Leitura: <b>≈ {mins[c["k"]]} min</b></span><span><b>{len(ctx.sections[c["k"]])}</b> seções</span></div>'
-            f'<div class="foot"><a class="btn primary sm" href="{m["file"]}">Abrir manual {svg("arrow")}</a>'
-            f'<a class="btn ghost sm" href="aprender/{m["stage"]}.html">Estudar na trilha</a></div></article>')
-
-    quick = ''.join(
-        f'<a href="{ctx.resolve(r)["url"]}"><b>{esc(t)}</b><span>{esc(d)}</span></a>' for r, t, d in C.QUICK)
-
-    steps = ''
-    for s in STAGES:
-        keys = [l['id'] for l in s['lessons']]
-        steps += (
-            f'<a class="step" href="aprender/{s["id"]}.html"><span class="n" aria-hidden="true">{s["n"]}</span>'
-            f'<div><h3>Etapa {s["n"]}: {esc(s["title"])}</h3><p>{esc(s["summary"])}</p></div>'
-            f'<div class="side">{len(s["lessons"])} lições<br>{progress(["lesson:" + k for k in keys], "lições", "Progresso da etapa " + str(s["n"]))}</div></a>')
-
-    sc_chips = ''.join(f'<a class="chip" href="consultar.html?q={esc(s["q"])}">{esc(s["title"])}</a>' for s in C.SHORTCUTS[:7])
-    body = f'''
-<section class="hero-p"><div class="wrap">
-  <div>
-    <p class="eyebrow">Programa Prioritário Indústria 4.0 · Prestação de contas</p>
-    <h1>Aprenda e consulte a prestação de contas do PPI 4.0 em um só lugar</h1>
-    <p class="lead">Portal de conhecimento para analistas de P&amp;D. Siga uma trilha de aprendizado em três etapas ou vá direto ao procedimento, à ferramenta ou à norma de que precisa.</p>
-    <div class="cta"><a class="btn on-dark" href="aprender.html">Começar a aprender {svg("arrow")}</a>
-    <a class="btn on-dark outline" href="guias/base-normativa-pdi.html#normas">Consultar normas</a></div>
-  </div>
-  <div class="hero-side">
-    <h2>Buscar nos três manuais</h2>
-    <form role="search" action="consultar.html" method="get"><label class="sr-only" for="h-q">Buscar nos três manuais</label><input id="h-q" name="q" type="search" placeholder="Ex.: rateio, adendo, conciliação" autocomplete="off"><button type="submit" aria-label="Buscar">{svg("search")}</button></form>
-    <div class="chips" aria-label="Assuntos frequentes">{sc_chips}</div>
-    <a class="cont-card" id="cont-card" href="#"><small>Continuar de onde parei</small><b></b></a>
-  </div>
+    body = """<section class="hero-p"><div class="wrap">
+<div><p class="eyebrow">PPI 4.0</p><h1>Prestação de contas, sem complicação</h1>
+<p class="lead">Encontre o procedimento, a ferramenta ou a norma de que precisa.</p>
+<div class="cta"><a class="btn on-dark" href="aprender.html">Começar a aprender</a><a class="btn on-dark outline" href="checklists.html">Checklist mensal</a></div></div>
+<div class="hero-side"><h2>O que você procura?</h2><form role="search" action="consultar.html" method="get"><label class="sr-only" for="h-q">Buscar nos manuais</label><input id="h-q" name="q" type="search" placeholder="Ex.: rateio, adendo, conciliação"><button type="submit" aria-label="Buscar">Buscar</button></form><a class="cont-card" id="cont-card" href="#"><small>Continuar estudo</small><b></b></a></div>
 </div></section>
-
-<section class="sec-p"><div class="wrap">
-  <header><h2>Como você quer usar o portal?</h2><p class="sub">Dois caminhos levam ao mesmo conteúdo. Escolha o que combina com o momento.</p></header>
-  <div class="grid g2">
-    <a class="card link tone path c-m1" href="aprender.html"><span class="ico">{svg("book")}</span><div><h3>Quero aprender</h3><p>Trilha progressiva em três etapas, com objetivos, exemplos, estudos de caso, exercícios e perguntas de revisão. Seu progresso fica salvo neste navegador.</p><ul><li>Processos e prestação de contas</li><li>Ferramentas e preenchimento de documentos</li><li>Base normativa e legislação</li></ul></div></a>
-    <a class="card link tone path c-m2" href="consultar.html"><span class="ico">{svg("search")}</span><div><h3>Preciso consultar</h3><p>Busca nos três manuais com filtros por manual, categoria e assunto, atalhos para temas frequentes, checklists e glossário.</p><ul><li>Busca integrada com acesso direto à seção</li><li>Atalhos: rateio de RH, planilha, indicadores, legislação</li><li>Checklists operacionais interativos</li></ul></div></a>
-  </div>
-</div></section>
-
-<section class="sec-p" id="manuais"><div class="wrap">
-  <header><h2>Os três manuais</h2><p class="sub">Cada manual continua no mesmo endereço de antes. A complexidade é uma classificação editorial. O tempo de leitura considera 200 palavras por minuto e não inclui prints e diagramas.</p></header>
-  <div class="grid g3">{mcards}</div>
-</div></section>
-
-<section class="sec-p"><div class="wrap">
-  <header><h2>Jornada de aprendizado</h2><p class="sub">Três etapas em ordem progressiva. O conteúdo técnico original dos manuais permanece integral e as lições apontam para as seções de cada um.</p></header>
-  <div class="steps">{steps}</div>
-</div></section>
-
-<section class="sec-p"><div class="wrap">
-  <header><h2>Acesso rápido</h2><p class="sub">Os conteúdos mais usados na rotina.</p></header>
-  <div class="quick">{quick}</div>
-  <div id="fav-home" class="js-only" hidden style="margin-top:22px"><h3 style="margin:0 0 8px;color:var(--accent-ink)">Seus favoritos</h3><ul class="fav-list" id="fav-home-list"></ul></div>
-</div></section>
-
-<section class="sec-p"><div class="wrap">
-  <header><h2>Como ler as marcações</h2><p class="sub">O portal diferencia o tipo de cada informação para que você saiba o quanto ela sustenta uma decisão.</p></header>
-  {legend()}
-  <div class="grid g2" style="margin-top:14px">
-    {note("premise", "<p>Premissas são inferências operacionais que ainda precisam de validação com a coordenação e com os instrumentos de cada projeto.</p>")}
-    {note("gap", "<p>Lacunas indicam informação ausente nos documentos de origem. O portal não preenche lacunas com regras novas.</p>")}
-  </div>
-  <p class="disclaimer">Este material não substitui parecer jurídico. Confira o texto oficial das normas antes de citá-las em documento.</p>
-</div></section>
-'''
-    return shell('Portal PPI 4.0: guias de prestação de contas',
-                 'Portal de aprendizado e consulta para analistas de P&D: trilhas, busca nos três manuais, checklists e base normativa do PPI 4.0.',
-                 body, base='', page='home', scripts=('core.js', 'pages.js'))
+<section class="sec-p" id="manuais"><div class="wrap"><header><h2>Escolha um manual</h2></header><div class="grid g3">
+<a class="card link tone c-m1" href="guias/guia-prestacao-de-contas.html"><h3>Rotina e documentos</h3><p>O que entregar, quando e para quem.</p><span>Abrir guia →</span></a>
+<a class="card link tone c-m2" href="guias/manual-das-ferramentas.html"><h3>Planilha e relatórios</h3><p>Preenchimento, conferência e correção de erros.</p><span>Abrir ferramentas →</span></a>
+<a class="card link tone c-m3" href="guias/base-normativa-pdi.html"><h3>Normas de PD&amp;I</h3><p>Regras e links para os textos oficiais.</p><span>Consultar normas →</span></a>
+</div><div id="fav-home" class="js-only" hidden style="margin-top:22px"><h3>Seus favoritos</h3><ul class="fav-list" id="fav-home-list"></ul></div></div></section>"""
+    return shell('Portal PPI 4.0', 'Procedimentos, ferramentas e normas para prestação de contas.', body, page='home', scripts=('core.js', 'pages.js'))
 
 
-# ------------------------------------------------------------------ trilhas
 def lesson_minutes(ctx, l):
     own = wcount(l['body']) + sum(wcount(q + a) for q, a in l['review'])
     man = sum(next(s['words'] for s in ctx.sections[r.split('#')[0]] if s['id'] == r.split('#')[1].split(':')[0]) for r in l['refs'])

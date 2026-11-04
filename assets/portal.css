@@ -408,3 +408,4 @@ code{font-family:var(--f-mono);font-size:.9em;background:var(--surface-2);paddin
 .tbl-scroll table{min-width:520px}
 
 .card ol a,.card ul a{display:inline-block;padding:3px 0;min-height:24px}
+#fav-home[hidden]{display:none!important}
