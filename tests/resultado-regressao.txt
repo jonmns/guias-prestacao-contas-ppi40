@@ -1,0 +1,58 @@
+OK 1366px sem rolagem: index.html
+OK 1366px sem rolagem: aprender.html
+OK 1366px sem rolagem: consultar.html
+OK 1366px sem rolagem: checklists.html
+OK 1366px sem rolagem: glossario.html
+OK 1366px sem rolagem: meu-espaco.html
+OK 1366px sem rolagem: aprender/etapa-1-processos.html
+OK 1366px sem rolagem: aprender/etapa-2-ferramentas.html
+OK 1366px sem rolagem: aprender/etapa-3-normas.html
+OK 1366px sem rolagem: guias/guia-prestacao-de-contas.html
+OK 1366px sem rolagem: guias/manual-das-ferramentas.html
+OK 1366px sem rolagem: guias/base-normativa-pdi.html
+OK 768px sem rolagem: index.html
+OK 768px sem rolagem: aprender.html
+OK 768px sem rolagem: consultar.html
+OK 768px sem rolagem: checklists.html
+OK 768px sem rolagem: glossario.html
+OK 768px sem rolagem: meu-espaco.html
+OK 768px sem rolagem: aprender/etapa-1-processos.html
+OK 768px sem rolagem: aprender/etapa-2-ferramentas.html
+OK 768px sem rolagem: aprender/etapa-3-normas.html
+OK 768px sem rolagem: guias/guia-prestacao-de-contas.html
+OK 768px sem rolagem: guias/manual-das-ferramentas.html
+OK 768px sem rolagem: guias/base-normativa-pdi.html
+OK 390px sem rolagem: index.html
+OK 390px sem rolagem: aprender.html
+OK 390px sem rolagem: consultar.html
+OK 390px sem rolagem: checklists.html
+OK 390px sem rolagem: glossario.html
+OK 390px sem rolagem: meu-espaco.html
+OK 390px sem rolagem: aprender/etapa-1-processos.html
+OK 390px sem rolagem: aprender/etapa-2-ferramentas.html
+OK 390px sem rolagem: aprender/etapa-3-normas.html
+OK 390px sem rolagem: guias/guia-prestacao-de-contas.html
+OK 390px sem rolagem: guias/manual-das-ferramentas.html
+OK 390px sem rolagem: guias/base-normativa-pdi.html
+OK filtro de alertas: cinco de severidade alta
+OK filtros de alerta combinados
+OK diagnóstico encontra sintoma e orientação
+OK atalho abre diagnóstico
+OK download de PDF válido
+OK mapa com 13 áreas
+OK mapa mostra documentos da área
+OK organograma expande detalhes
+OK ordenação acessível
+OK linha expansível
+OK fluxogramas navegáveis
+OK fluxo filtrado por fase e responsável
+OK prioridade persiste
+OK aula PD&I renderiza
+OK voltar restaura posição da biblioteca
+OK favorito do manual salvo no portal
+OK painel consolidado
+OK backup inclui estado especializado
+OK importação inválida recusada
+OK sem erros JavaScript: 
+OK sem recursos locais ausentes: 
+TOTAL 57 verificações aprovadas

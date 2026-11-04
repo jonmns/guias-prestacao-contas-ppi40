@@ -1,0 +1,27 @@
+/* Pontos numerados dos prints: coordenadas em pixels da imagem original (w x h).
+   Chave: ordem da figura .shot na pagina; 'cap' e usado para conferir a figura. n -> lista de [x,y]. */
+window.PPI_HOTSPOTS=[
+ {w:1800,h:231,cap:"Planilha Financeira · aba VI - Material de Consumo (modelo das abas de rubrica)",pts:{"1":[[22,18]],"2":[[1206,18]],"3":[[1328,17]]}},
+ {w:1800,h:219,cap:"Planilha Financeira · aba I - Programa de Computador",pts:{"1":[[895,19]],"2":[[1034,19]]}},
+ {w:1644,h:413,cap:"Planilha Financeira · aba III.I RHD_Abertura_Pgtos · colunas A a N",pts:{"1":[[1366,25]],"2":[[145,76]],"3":[[1245,76]],"4":[[1341,76]]}},
+ {w:1800,h:401,cap:"Planilha Financeira · aba III.I RHD_Abertura_Pgtos · colunas AD a BB",pts:{"5":[[118,72]],"6":[[666,72]],"7":[[1146,72]],"8":[[1266,72]],"9":[[1324,72]]}},
+ {w:1800,h:409,cap:"Planilha Financeira · aba Posição Financeira · cabeçalho",pts:{"1":[[359,114]],"2":[[359,250]],"3":[[1396,20]],"4":[[924,175]],"5":[[1396,175]],"6":[[1379,251]]}},
+ {w:1800,h:230,cap:"Planilha Financeira · Posição Financeira · bloco de uma rubrica",pts:{"1":[[359,101]],"2":[[1188,101]],"3":[[1378,101]]}},
+ {w:1800,h:758,cap:"Planilha Financeira · Posição Financeira · linhas 49 a 79",pts:{"1":[[22,17]],"2":[[22,104]],"3":[[22,186]],"4":[[22,347]],"5":[[22,452]],"6":[[22,542]],"7":[[22,586]]}},
+ {w:1800,h:811,cap:"Planilha Financeira · aba Valores previstos Iniciais",pts:{"1":[[623,59]],"2":[[117,424]],"3":[[117,478]],"4":[[117,532]],"5":[[117,726]],"6":[[117,608]]}},
+ {w:1800,h:337,cap:"Planilha Financeira · aba Profissionais Previstos",pts:{"1":[[108,20]],"2":[[919,20]]}},
+ {w:1800,h:1255,cap:"Planilha Financeira · aba Consolidado",pts:{"1":[[1265,135]],"2":[[1439,135]],"3":[[1785,135]],"4":[[361,774]],"5":[[361,1032]],"6":[[361,1154]]}},
+ {w:1800,h:1500,cap:"Planilha Financeira · aba Conc. Bancária",pts:{"1":[[22,18]],"2":[[22,160]],"3":[[1787,205]],"4":[[22,1023]],"5":[[22,1048]],"6":[[1454,1124]]}},
+ {w:1800,h:841,cap:"Indicadores Gerenciais · aba RHD (meses 1 a 6)",pts:{"1":[[35,72]],"2":[[35,152]],"3":[[35,389]],"4":[[35,586]],"5":[[35,670]]}},
+ {w:1083,h:1149,cap:"Relatório Demonstrativo · I – Dados Gerais (página 1)",pts:{"1":[[32,79]],"2":[[32,251]],"3":[[32,424]],"4":[[32,511]],"5":[[32,684]]}},
+ {w:1094,h:1446,cap:"Relatório Demonstrativo · II a VIII (página 2)",pts:{"1":[[32,33]],"2":[[32,535]],"3":[[32,666]],"4":[[32,796]],"5":[[32,946]],"6":[[32,1169]],"7":[[32,1322]]}},
+ {w:1095,h:1361,cap:"Relatório Demonstrativo · IX a XI (página 3)",pts:{"1":[[32,33]],"2":[[32,813]],"3":[[32,1013]]}},
+ {w:1093,h:1544,cap:"Relatório Demonstrativo · XII – quadro da atividade (página 4)",pts:{"1":[[32,188]],"2":[[32,215]],"3":[[32,269]],"4":[[32,420]],"5":[[32,1004]],"6":[[32,1092]],"7":[[32,1266]]}},
+ {w:1083,h:1230,cap:"Relatório Demonstrativo · XII – continuação (página 5)",pts:{"8":[[32,33]],"9":[[32,580]],"10":[[915,580]],"11":[[32,766]]}},
+ {w:1095,h:640,cap:"Relatório Demonstrativo · XIV – Comparativo (página 6)",pts:{"1":[[607,174]],"2":[[815,174]]}},
+ {w:1555,h:340,cap:"Relatório Demonstrativo · XV – Detalhamento do RH (página 7)",pts:{"1":[[32,122]]}},
+ {w:1537,h:841,cap:"Relatório Demonstrativo · XVI – Indicadores Gerenciais (página 8)",pts:{"1":[[31,165]],"2":[[32,694]],"3":[[32,739]]}},
+ {w:1533,h:945,cap:"Relatório Demonstrativo · respostas do XVI e XVII a XIX (página 11)",pts:{"1":[[31,32],[31,167]],"2":[[32,303]],"3":[[32,525]],"4":[[32,746]]}},
+ {w:1533,h:349,cap:"Relatório Demonstrativo · XIX – quadro de mudanças (página 12)",pts:{"5":[[32,120]]}},
+ {w:966,h:379,cap:"Relatório Demonstrativo · XX e XXI (página 13)",pts:{"1":[[32,118]],"2":[[32,279]]}},
+];

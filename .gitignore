@@ -1,0 +1,5 @@
+__pycache__/
+*.py[cod]
+tests/*-amostra.pdf
+tests/*-amostra.json
+tests/diagnostico-*.png
