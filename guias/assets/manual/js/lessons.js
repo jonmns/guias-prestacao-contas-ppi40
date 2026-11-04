@@ -220,7 +220,7 @@
       var sub = el('ul', { class: 'sb-sub', id: 'sbm-' + m.id });
       var count = el('span', { class: 'sb-count' });
       var btn = el('button', { type: 'button', class: 'sb-mod-btn', 'aria-expanded': 'false', 'aria-controls': 'sbm-' + m.id }, [
-        (function () { var c = PPI.icon('chev'); c.setAttribute('class', 'chev'); return c; })(),
+        (function () { var c = PPI.icon('chev'); c.setAttribute('class', 'sb-chevron'); return c; })(),
         el('span', { style: 'flex:1;min-width:0' }, [el('b', { text: (mi + 1) + '. ' + m.title }), el('small', { text: m.sub })]), count]);
       btn.addEventListener('click', function () { toggleMod(m.id); });
       wrap.appendChild(el('div', { class: 'sb-mod-h' }, [btn]));

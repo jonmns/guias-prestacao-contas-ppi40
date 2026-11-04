@@ -94,8 +94,8 @@ html.js #toc-fallback{display:none}
 .sb-mod-h{display:flex;align-items:center;gap:6px;width:100%}
 .sb-mod-btn{flex:1;display:flex;align-items:center;gap:10px;text-align:left;padding:10px 8px;background:none;border:0;border-radius:8px;color:var(--ink);cursor:pointer;min-height:44px}
 .sb-mod-btn:hover{background:var(--surface-2)}
-.sb-mod-btn .chev{width:14px;height:14px;flex:none;transition:transform .2s var(--ease);color:var(--muted)}
-.sb-mod-btn[aria-expanded="true"] .chev{transform:rotate(90deg)}
+.sb-mod-btn .sb-chevron{width:14px;height:14px;flex:none;transition:transform .2s var(--ease);color:var(--muted)}
+.sb-mod-btn[aria-expanded="true"] .sb-chevron{transform:rotate(90deg)}
 .sb-mod-btn b{display:block;font-size:.92rem;color:var(--accent-ink);line-height:1.25}
 .sb-mod-btn small{display:block;font-size:.72rem;color:var(--muted);line-height:1.3;margin-top:1px}
 .sb-count{font:500 .72rem var(--f-mono);color:var(--muted);white-space:nowrap;margin-right:6px}
@@ -448,3 +448,22 @@ tr[hidden]{display:none}
   html.print-checklist .check{grid-template-columns:minmax(0,1fr)}
   html.print-checklist .check fieldset{break-inside:avoid}
 }
+
+/* Navegação lateral: ícone isolado dos diagramas e seleção discreta. */
+.sidebar{scrollbar-width:thin;scrollbar-color:var(--line) transparent;padding-right:10px;scrollbar-gutter:stable}
+.sidebar::-webkit-scrollbar{width:6px}
+.sidebar::-webkit-scrollbar-track{background:transparent}
+.sidebar::-webkit-scrollbar-thumb{background:var(--line);border-radius:8px}
+.sb-mod{padding:6px 0;border-bottom:0}
+.sb-mod-btn{padding:12px 10px;gap:10px;min-width:0;min-height:48px}
+.sb-mod-btn .sb-chevron{display:block;width:14px;height:14px;min-height:0;flex:0 0 14px;background:none;padding:0;margin:0;clip-path:none;overflow:visible}
+.sb-mod-btn small{margin-top:4px;line-height:1.4}
+.sb-sub{padding-left:6px;margin:4px 0 10px}
+.sb-sec>a,.sb-les>a{position:relative;min-width:0;padding:10px 12px;margin:3px 0;border-left:0;border-radius:9px;gap:9px;transition:background-color .15s,color .15s;overflow-wrap:anywhere}
+.sb-sec>a>span:last-child,.sb-les>a>span:last-child{min-width:0;flex:1}
+.sb-sec .n{flex:0 0 1.6em}
+.sb-sec>a[aria-current],.sb-les>a[aria-current]{background:color-mix(in srgb,var(--accent) 10%,var(--surface));color:var(--accent-ink);box-shadow:inset 3px 0 0 var(--accent);font-weight:700}
+.sb-sec>a:focus-visible,.sb-les>a:focus-visible,.sb-mod-btn:focus-visible{outline:2px solid var(--accent);outline-offset:-2px}
+.sidebar .tick{width:14px;height:14px;margin-top:3px;border-color:var(--line)}
+.sidebar .tick.on{border-color:var(--ok)}
+@media(prefers-reduced-motion:reduce){.sb-sec>a,.sb-les>a{transition:none}}
