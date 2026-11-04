@@ -1,0 +1,53 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Guias de Prestação de Contas PPI 4.0</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Lato:wght@400;700;900&display=swap">
+<style>
+:root{--bg:#F5F8FB;--surface:#FFFFFF;--line:#D6E1EC;--ink:#13263C;--muted:#56697F;--accent:#1E7FC2;--accent-ink:#0F2A4A;color-scheme:light}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){--bg:#0B1724;--surface:#112234;--line:#24405C;--ink:#E4ECF4;--muted:#9DB0C4;--accent:#5DB2EA;--accent-ink:#CFE6F8;color-scheme:dark}}
+:root[data-theme="dark"]{--bg:#0B1724;--surface:#112234;--line:#24405C;--ink:#E4ECF4;--muted:#9DB0C4;--accent:#5DB2EA;--accent-ink:#CFE6F8;color-scheme:dark}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:"Lato","Calibri","Segoe UI",Arial,sans-serif;line-height:1.6}
+.band{background:linear-gradient(120deg,#0B2240 0%,#0F2A4A 38%,#1E7FC2 82%,#3FA9E0 100%);color:#fff}
+.wrap{max-width:1040px;margin:0 auto;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+.band .wrap{padding-block:48px 56px}
+.eyebrow{font-size:.75rem;letter-spacing:.12em;text-transform:uppercase;font-weight:700;color:#9FD3F5}
+h1{font-size:clamp(1.8rem,4vw,2.6rem);font-weight:900;line-height:1.15;margin:8px 0 12px;text-wrap:balance}
+.band p{color:#DCEBF7;max-width:62ch;margin:0}
+main.wrap{padding-block:32px 72px;display:grid;gap:16px}
+.card{display:grid;grid-template-columns:56px minmax(0,1fr) auto;gap:16px;align-items:center;background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:18px 20px;text-decoration:none;color:inherit}
+.card:hover,.card:focus-visible{border-color:var(--accent);outline:none;box-shadow:0 0 0 3px color-mix(in srgb,var(--accent) 25%,transparent)}
+.n{width:48px;height:48px;border-radius:10px;background:var(--accent-ink);color:var(--surface);display:grid;place-items:center;font-weight:900;font-size:1.1rem}
+.card h2{margin:0;font-size:1.15rem;color:var(--accent-ink)}
+.card p{margin:4px 0 0;color:var(--muted);font-size:.92rem}
+.go{font-weight:700;color:var(--accent);white-space:nowrap}
+.note{color:var(--muted);font-size:.85rem;max-width:72ch}
+.theme-btn{position:fixed;right:calc(16px + env(safe-area-inset-right,0px));bottom:calc(16px + env(safe-area-inset-bottom,0px));font:700 .84rem inherit;font-family:inherit;background:var(--accent-ink);color:var(--surface);border:1px solid var(--line);border-radius:999px;padding:9px 14px;cursor:pointer}
+@media (max-width:640px){.card{grid-template-columns:48px minmax(0,1fr)}.go{grid-column:2}}
+</style>
+</head>
+<body>
+<header class="band"><div class="wrap">
+<div class="eyebrow">Programa Prioritário Indústria 4.0 · Prestação de contas</div>
+<h1>Guias para analistas de P&amp;D de instituições executoras</h1>
+<p>Três materiais de referência sobre a rotina de prestação de contas de projetos PPI 4.0 coordenados pelo CITS, as ferramentas usadas no fechamento mensal e a base normativa de PD&amp;I.</p>
+</div></header>
+<main class="wrap">
+<a class="card" href="guias/guia-prestacao-de-contas.html"><span class="n">1</span><div><h2>Guia de prestação de contas</h2><p>Rotina do analista, obrigações, dependências entre áreas, fluxogramas, SIPOC, RACI, jornada e fluxo end-to-end.</p></div><span class="go">Abrir →</span></a>
+<a class="card" href="guias/manual-das-ferramentas.html"><span class="n">2</span><div><h2>Manual das ferramentas</h2><p>Planilha Financeira, Indicadores Gerenciais e Relatório Técnico: preenchimento, prints anotados, leitura dos indicadores e checklist mensal.</p></div><span class="go">Abrir →</span></a>
+<a class="card" href="guias/base-normativa-pdi.html"><span class="n">3</span><div><h2>Base normativa de PD&amp;I</h2><p>Leis, decretos, resoluções, portarias e manuais do PPI 4.0 e do convênio direto, com links para o texto oficial.</p></div><span class="go">Abrir →</span></a>
+<p class="note">Material de apoio. Itens marcados como premissa ou lacuna devem ser validados com a coordenadora e com o instrumento de cada projeto. Este conteúdo não substitui parecer jurídico.</p>
+</main>
+<button type="button" class="theme-btn" id="tb">Modo escuro</button>
+<script>
+(function(){var K='ppi40-guia-tema',r=document.documentElement,b=document.getElementById('tb'),mq=window.matchMedia&&matchMedia('(prefers-color-scheme: dark)');
+function cur(){return r.getAttribute('data-theme')||(mq&&mq.matches?'dark':'light');}
+function paint(){b.textContent=cur()==='dark'?'Modo claro':'Modo escuro';}
+try{var s=localStorage.getItem(K);if(s)r.setAttribute('data-theme',s);}catch(e){}
+b.onclick=function(){var n=cur()==='dark'?'light':'dark';r.setAttribute('data-theme',n);try{localStorage.setItem(K,n);}catch(e){}paint();};paint();})();
+</script>
+</body>
+</html>
