@@ -195,7 +195,7 @@
         } else if (act === 'refazer') {
           S.resetQuiz(id); PDI.App.render({ keepFocus: true }); var s = $('#s-questoes'); s && s.scrollIntoView({ behavior: 'instant' }); var hq = $('#h-questoes'); hq && hq.focus({ preventScroll: true }); PDI.App.announce('Questões reiniciadas.');
         }
-      });
+      }, root._ac ? { signal: root._ac.signal } : false);
       var det = $('.resp', root);
       det.addEventListener('toggle', function () { if (det.open) S.setPratica(id, true); });
 
@@ -352,8 +352,8 @@
       root.addEventListener('change', function (e) {
         var t = e.target; if (!t.matches || !t.matches('input[type=checkbox][data-c]')) return;
         S.toggleCheck(t.getAttribute('data-c'), t.getAttribute('data-i'), t.checked); upd(t.getAttribute('data-c'));
-      });
-      root.addEventListener('click', function (e) { var b = e.target.closest('[data-reset]'); if (!b) return; var id = b.getAttribute('data-reset'); S.resetCheck(id); $$('input[data-c="' + id + '"]', root).forEach(function (i) { i.checked = false; }); upd(id); PDI.App.announce('Marcações limpas.'); });
+      }, root._ac ? { signal: root._ac.signal } : false);
+      root.addEventListener('click', function (e) { var b = e.target.closest('[data-reset]'); if (!b) return; var id = b.getAttribute('data-reset'); S.resetCheck(id); $$('input[data-c="' + id + '"]', root).forEach(function (i) { i.checked = false; }); upd(id); PDI.App.announce('Marcações limpas.'); }, root._ac ? { signal: root._ac.signal } : false);
       function upd(id) { var c = PDI.checklists.filter(function (x) { return x.id === id; })[0], n = Object.keys(S.checked(id)).length; $('[data-n="' + id + '"]', root).textContent = n + ' de ' + c.itens.length; }
     } };
   };

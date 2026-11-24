@@ -132,6 +132,10 @@ def main():
         'window.PPI_INDEX=' + json.dumps(idx, ensure_ascii=False, separators=(',', ':')) + ';', 'utf-8')
 
     w = lambda name, html: (ROOT / name).write_text(html, 'utf-8')
+    from rh_normas import browser_table
+    (ROOT / 'assets' / 'normas.js').write_text(
+        '/* Gerado por tools/build.py: não editar. */\nwindow.PPI_NORMAS=' + json.dumps(browser_table(), ensure_ascii=False, separators=(',', ':')) + ';\n'
+        + (ROOT / 'tools' / 'normas_linker.js').read_text('utf-8'), 'utf-8')
     w('index.html', P.page_index(ctx))
     w('aprender.html', P.page_aprender(ctx))
     for i, st in enumerate(STAGES):

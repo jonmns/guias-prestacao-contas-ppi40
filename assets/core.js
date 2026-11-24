@@ -1,3 +1,4 @@
+(function(){if(window.__ppiNormasLoader)return;window.__ppiNormasLoader=1;var cs=document.currentScript;var s=document.createElement('script');s.src=new URL('normas.js',cs&&cs.src?cs.src:location.href).href;s.defer=true;document.head.appendChild(s);})();
 /* Portal PPI 4.0 · núcleo compartilhado (todas as páginas)
    Armazenamento local com plano B em memória, tema, cabeçalho, busca, progresso e favoritos. */
 (function () {

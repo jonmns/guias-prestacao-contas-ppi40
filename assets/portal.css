@@ -438,3 +438,5 @@ code{font-family:var(--f-mono);font-size:.9em;background:var(--surface-2);paddin
 .rh-pc{border-top:5px solid var(--tone)}
 .rh-sec[hidden],.rh-t tr[hidden],.rh-sec h3[hidden],.rh-sec .tbl-scroll[hidden],.side-nav li[hidden]{display:none}
 @media (max-width:680px){.rh-t tbody th{width:auto}.lesson.rh-sec{padding:18px 16px}}
+.rh-law{color:var(--accent);text-decoration:underline;text-decoration-thickness:1px;text-underline-offset:3px}.rh-law:hover{text-decoration-thickness:2px}.rh-law::after{content:"↗";font-size:.75em;margin-left:2px;text-decoration:none;display:inline-block}.rh-t tbody th .rh-law{color:var(--accent-ink);font-weight:700}.rh-a{display:block;font-weight:700;color:var(--ink)}.rh-r{display:block;margin-top:3px;color:var(--muted);font-size:.88rem;line-height:1.5}
+.ppi-norma{color:inherit;text-decoration:underline dotted;text-decoration-thickness:1px;text-underline-offset:3px}.ppi-norma:hover{color:var(--accent,#1A6FAE);text-decoration-style:solid}.ppi-norma::after{content:"\2197";font-size:.72em;margin-left:1px;opacity:.7}

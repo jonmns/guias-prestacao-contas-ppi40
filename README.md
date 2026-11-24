@@ -16,7 +16,8 @@ Para desenvolvimento e publicação, prefira um servidor estático. Por exemplo,
 - Plataforma de aprendizagem PD&I, incluindo suas 18 aulas.
 - Navegação entre os manuais, favoritos e marcações por seção compatíveis com o portal.
 - Busca global regenerada, com 325 registros, incluindo as aulas PD&I e a Legislação de RH.
-- Aba **Legislação de RH** (`legislacao-rh.html`): 12 temas de legislação trabalhista, previdenciária, eSocial, NRs, LGPD e normas específicas do IKT, com filtro, links oficiais e prioridades. Conteúdo em `tools/rh.py`.
+- Aba **Legislação de RH** (`legislacao-rh.html`): 12 temas de legislação trabalhista, previdenciária, eSocial, NRs, LGPD e normas específicas do IKT, com filtro, links oficiais e prioridades. Conteúdo em `tools/rh.py`; links oficiais e resumos de cada norma em `tools/rh_normas.py`.
+- Links automáticos para normas em toda a plataforma (`assets/normas.js`, gerado pelo build a partir de `tools/rh_normas.py` e `tools/normas_linker.js`): toda menção a lei, decreto, lei complementar, portaria, IN RFB, Resolução CAPDA, NR, CLT ou LGPD conhecida vira link para o texto oficial, inclusive no conteúdo gerado pelas aulas de PD&I.
 - Painel com indicadores dos manuais e backup completo no Meu espaço.
 
 ## Recursos acrescentados

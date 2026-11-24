@@ -145,6 +145,10 @@
     root.setAttribute('data-view', isLib ? 'lib' : 'app');
     root.setAttribute('data-mode', mode);
     if (viewApp._cleanup) { viewApp._cleanup(); viewApp._cleanup = null; }
+    /* Cada tela registra seus ouvintes em viewApp, que é reaproveitado: cancela os da tela anterior
+       para que respostas e conclusões não sejam gravadas na aula errada. */
+    if (viewApp._ac) viewApp._ac.abort();
+    viewApp._ac = typeof AbortController === 'function' ? new AbortController() : null;
     var m = $('#mode-aprender'), c = $('#mode-consultar');
     m.removeAttribute('aria-current'); c.removeAttribute('aria-current');
     (mode === 'aprender' ? m : c).setAttribute('aria-current', 'page');

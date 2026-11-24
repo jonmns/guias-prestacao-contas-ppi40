@@ -3,3 +3,6 @@
 .ppi-section-tools{display:flex;gap:8px;flex-wrap:wrap;margin:10px 0}.ppi-section-tools button{font:inherit;padding:6px 10px;cursor:pointer}@media print{.ppi-section-tools{display:none!important}}
 
 .ppi-optional{margin:12px 0;border:1px solid var(--line,#9aaabb);border-radius:10px}.ppi-optional>summary{padding:14px;cursor:pointer;font-weight:700}.ppi-optional>.ppi-enhance{border:0;margin:0}.ppi-optional>summary:focus-visible{outline:3px solid #ca6200;outline-offset:3px}
+.ppi-norma{color:inherit;text-decoration:underline dotted;text-decoration-thickness:1px;text-underline-offset:3px}.ppi-norma:hover{color:var(--accent,#1A6FAE);text-decoration-style:solid}.ppi-norma::after{content:"\2197";font-size:.72em;margin-left:1px;opacity:.7}
+.ppi-portal-nav{transition:transform .2s ease,opacity .2s ease}.ppi-portal-nav.ppi-nav-hide{transform:translateY(calc(100% + 16px));opacity:0;pointer-events:none}@media (prefers-reduced-motion:reduce){.ppi-portal-nav{transition:none}}
+.ppi-portal-nav.ppi-nav-up{bottom:70px}

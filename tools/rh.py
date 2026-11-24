@@ -64,7 +64,7 @@ SECTIONS = [
              ('Lei nº 9.250/1995', 'Regras do Imposto de Renda'),
              ('Decreto nº 9.580/2018', 'Regulamento do Imposto de Renda'),
              ('Instrução Normativa RFB nº 2.110/2022', 'Normas gerais de tributação previdenciária'),
-             ('Instrução Normativa RFB nº 2.005/2021', 'DCTFWeb e alterações posteriores'),
+             ('Instrução Normativa RFB nº 2.237/2024', 'DCTFWeb (substituiu a IN RFB nº 2.005/2021 a partir de 01/01/2025)'),
              ('Portaria MTE nº 240/2024', 'Operacionalização do FGTS Digital'),
          ], None)],
          lists=[('Controles essenciais', [
@@ -167,7 +167,7 @@ SECTIONS = [
              ('Leiautes eSocial S-1.3 e notas técnicas aplicáveis', 'Estrutura dos dados e validações'),
              ('Portaria MTP nº 671/2021', 'Registro de empregados e obrigações trabalhistas'),
              ('Lei nº 8.212/1991', 'Informações previdenciárias'),
-             ('IN RFB nº 2.005/2021', 'DCTFWeb'),
+             ('IN RFB nº 2.237/2024', 'DCTFWeb (substituiu a IN RFB nº 2.005/2021)'),
              ('IN RFB nº 2.043/2021', 'EFD-Reinf'),
              ('Lei nº 8.036/1990', 'Recolhimentos do FGTS'),
              ('Portaria MTE nº 240/2024', 'FGTS Digital'),
@@ -290,7 +290,7 @@ SECTIONS = [
 
 PRIORITIES = [
     dict(n=1, title='Controle mensal de RH', level='Crítica', tone='bad', items=[
-        'CLT', 'Lei nº 8.212/1991 — INSS', 'Lei nº 8.036/1990 — FGTS', 'Leis nº 4.090/1962 e 4.749/1965 — 13º salário',
+        'CLT', 'Lei nº 8.212/1991 — INSS', 'Lei nº 8.036/1990 — FGTS', 'Lei nº 4.090/1962 e Lei nº 4.749/1965 — 13º salário',
         'eSocial, FGTS Digital e DCTFWeb', 'Convenção coletiva aplicável']),
     dict(n=2, title='Documentação e conformidade', level='Alta', tone='warn', items=[
         'Portaria MTP nº 671/2021', 'LGPD', 'NR-01, NR-07 e NR-17', 'Legislação de férias e afastamentos',

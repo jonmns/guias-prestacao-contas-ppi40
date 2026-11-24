@@ -431,9 +431,42 @@ def page_glossario(ctx):
 
 
 # ------------------------------------------------------------------ legislação de RH
+LAW_RE = re.compile(
+    r'(Lei Complementar nº [\d.]+/\d{4}|Decreto-Lei nº [\d.]+/\d{4}|Decreto nº [\d.]+/\d{4}|Lei nº [\d.]+/\d{4}'
+    r'|Portaria (?:MTP|MTE) nº [\d.]+/\d{4}|(?:IN|Instrução Normativa) RFB nº [\d.]+/\d{4}|NR-\d{2}|\bCLT\b|\bLGPD\b)')
+
+
+def law_link(name, label=None, cls='rh-law'):
+    from rh_normas import url_of
+    u = url_of(name)
+    lab = esc(label if label is not None else name)
+    if not u:
+        return lab
+    return (f'<a class="{cls}" href="{esc(u)}" target="_blank" rel="noopener" '
+            f'title="Abrir texto oficial em nova aba">{lab}<span class="sr-only"> (texto oficial, abre em nova aba)</span></a>')
+
+
+def linkify(text):
+    """Escapa o texto e transforma cada menção a norma em link para o texto oficial."""
+    out, pos = [], 0
+    for m in LAW_RE.finditer(text):
+        out.append(esc(text[pos:m.start()]))
+        t = m.group(0)
+        name = {'CLT': 'Decreto-Lei nº 5.452/1943', 'LGPD': 'Lei nº 13.709/2018'}.get(t, t)
+        out.append(law_link(name, t))
+        pos = m.end()
+    out.append(esc(text[pos:]))
+    return ''.join(out)
+
+
 def rh_table(head, rows, sub, sid, k):
+    from rh_normas import resumo_of
     th = ''.join(f'<th scope="col">{esc(h)}</th>' for h in head)
-    tr = ''.join(f'<tr><th scope="row">{esc(a)}</th><td>{esc(b)}</td></tr>' for a, b in rows)
+    tr = ''
+    for a, b in rows:
+        r = resumo_of(sid, a)
+        desc = f'<span class="rh-a">{linkify(b)}</span>' + (f'<span class="rh-r">{esc(r)}</span>' if r else '')
+        tr += f'<tr><th scope="row">{law_link(a)}</th><td>{desc}</td></tr>'
     cap = f'<h3 id="{sid}-t{k}">{esc(sub)}</h3>' if sub else ''
     return f'{cap}<div class="tbl-scroll"><table class="rh-t"><thead><tr>{th}</tr></thead><tbody>{tr}</tbody></table></div>'
 
@@ -444,14 +477,14 @@ def page_rh(ctx):
     for s in SECTIONS:
         nav += f'<li><a href="#{s["id"]}"><span class="mono">{s["n"]:02d}</span><span>{esc(s["title"])}</span></a></li>'
         prio = '<span class="badge rh-prio">Prioridade no IKT</span>' if s.get('prio') else ''
-        body = f'<p class="muted">{esc(s["intro"])}</p>' if s.get('intro') else ''
+        body = f'<p class="muted">{linkify(s["intro"])}</p>' if s.get('intro') else ''
         body += ''.join(rh_table(h, r, sub, s['id'], k) for k, (h, r, sub) in enumerate(s['tables']))
         for t, its in s.get('lists', []):
             body += f'<h3>{esc(t)}</h3><ul class="rh-list">' + ''.join(f'<li>{esc(i)}</li>' for i in its) + '</ul>'
         if s.get('note'):
-            body += f'<p class="rh-note">{esc(s["note"])}</p>'
+            body += f'<p class="rh-note">{linkify(s["note"])}</p>'
         if s.get('warn'):
-            body += f'<p class="disclaimer"><b>Atenção:</b> {esc(s["warn"])}</p>'
+            body += f'<p class="disclaimer"><b>Atenção:</b> {linkify(s["warn"])}</p>'
         body += '<p class="rh-src"><span class="muted">Fonte oficial:</span> ' + ' · '.join(
             f'<a href="{esc(u)}" target="_blank" rel="noopener">{esc(l)}</a>' for l, u in s['src']) + '</p>'
         secs += (f'<section class="lesson rh-sec" id="{s["id"]}"><div class="rh-h"><span class="rh-n mono">{s["n"]:02d}</span>'
@@ -459,10 +492,10 @@ def page_rh(ctx):
     nav += '<li><a href="#prioridades"><span class="mono">13</span><span>Prioridades para o RH do IKT</span></a></li>'
     pr = ''.join(
         f'<div class="card rh-pc rh-{p["tone"]}"><div class="rh-pl"><span class="badge">{esc(p["level"])}</span><small>Prioridade {p["n"]}</small></div>'
-        f'<h3>{esc(p["title"])}</h3><ul class="rh-list">' + ''.join(f'<li>{esc(i)}</li>' for i in p['items']) + '</ul></div>'
+        f'<h3>{esc(p["title"])}</h3><ul class="rh-list">' + ''.join(f'<li>{linkify(i)}</li>' for i in p['items']) + '</ul></div>'
         for p in PRIORITIES)
     secs += (f'<section class="lesson rh-sec" id="prioridades"><div class="rh-h"><span class="rh-n mono">13</span>'
-             f'<h2>Prioridades para o RH do IKT</h2></div><p class="muted">{esc(PRIORITY_INTRO)}</p><div class="grid g3">{pr}</div></section>')
+             f'<h2>Prioridades para o RH do IKT</h2></div><p class="muted">{linkify(PRIORITY_INTRO)}</p><div class="grid g3">{pr}</div></section>')
     total = sum(len(r) for s in SECTIONS for _, r, _ in s['tables'])
     body = f'''
 <div class="page-head"><div class="wrap"><p class="eyebrow">Legislação de RH</p><h1>Normas trabalhistas, previdenciárias e de RH</h1>
@@ -471,7 +504,7 @@ def page_rh(ctx):
   <nav class="side-nav" aria-label="Seções da legislação de RH"><b>Seções</b><ol>{nav}</ol></nav>
   <div class="rh-main">
     <div class="search-box"><label class="sr-only" for="rh-q">Filtrar normas</label><input id="rh-q" type="search" placeholder="Filtrar normas (ex.: FGTS, NR-07, S-1200, férias)" autocomplete="off"></div>
-    <p id="rh-count" class="muted" role="status" aria-live="polite">{total} referências em 12 temas.</p>
+    <p id="rh-count" class="muted" role="status" aria-live="polite">{total} referências em 12 temas. Clique no nome de uma norma para abrir o texto oficial.</p>
     {secs}
     <p class="disclaimer">Lista de referência para consulta. Confira sempre o texto vigente na fonte oficial, a convenção coletiva aplicável e os instrumentos de cada projeto. Este material não substitui parecer jurídico.</p>
   </div>

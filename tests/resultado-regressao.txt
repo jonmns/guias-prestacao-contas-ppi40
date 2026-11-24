@@ -4,6 +4,7 @@ OK 1366px sem rolagem: consultar.html
 OK 1366px sem rolagem: checklists.html
 OK 1366px sem rolagem: glossario.html
 OK 1366px sem rolagem: meu-espaco.html
+OK 1366px sem rolagem: legislacao-rh.html
 OK 1366px sem rolagem: aprender/etapa-1-processos.html
 OK 1366px sem rolagem: aprender/etapa-2-ferramentas.html
 OK 1366px sem rolagem: aprender/etapa-3-normas.html
@@ -16,6 +17,7 @@ OK 768px sem rolagem: consultar.html
 OK 768px sem rolagem: checklists.html
 OK 768px sem rolagem: glossario.html
 OK 768px sem rolagem: meu-espaco.html
+OK 768px sem rolagem: legislacao-rh.html
 OK 768px sem rolagem: aprender/etapa-1-processos.html
 OK 768px sem rolagem: aprender/etapa-2-ferramentas.html
 OK 768px sem rolagem: aprender/etapa-3-normas.html
@@ -28,6 +30,7 @@ OK 390px sem rolagem: consultar.html
 OK 390px sem rolagem: checklists.html
 OK 390px sem rolagem: glossario.html
 OK 390px sem rolagem: meu-espaco.html
+OK 390px sem rolagem: legislacao-rh.html
 OK 390px sem rolagem: aprender/etapa-1-processos.html
 OK 390px sem rolagem: aprender/etapa-2-ferramentas.html
 OK 390px sem rolagem: aprender/etapa-3-normas.html
@@ -48,6 +51,7 @@ OK fluxogramas navegáveis
 OK fluxo filtrado por fase e responsável
 OK prioridade persiste
 OK aula PD&I renderiza
+OK aula PD&I concluída sem afetar a aula visitada antes
 OK voltar restaura posição da biblioteca
 OK favorito do manual salvo no portal
 OK painel consolidado
@@ -55,4 +59,4 @@ OK backup inclui estado especializado
 OK importação inválida recusada
 OK sem erros JavaScript: 
 OK sem recursos locais ausentes: 
-TOTAL 57 verificações aprovadas
+TOTAL 61 verificações aprovadas
