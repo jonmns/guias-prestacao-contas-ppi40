@@ -182,5 +182,32 @@
     inp.addEventListener('input', run); run();
   }
 
-  ({ home: home, 'learn-hub': hub, me: me, consult: consult, glossary: glossary }[page] || function () {})();
+  /* ---------- legislação de RH ---------- */
+  function rh() {
+    var inp = $('#rh-q'), cnt = $('#rh-count'), secs = $$('.rh-sec'), links = $$('.side-nav a');
+    var initial = cnt.textContent;
+    function run() {
+      var q = PPI.norm(inp.value.trim()), n = 0;
+      secs.forEach(function (sec) {
+        var rows = $$('tbody tr', sec), hit = 0;
+        var head = !!q && PPI.norm($('h2', sec).textContent).indexOf(q) >= 0;
+        rows.forEach(function (tr) {
+          var ok = !q || head || PPI.norm(tr.textContent).indexOf(q) >= 0; tr.hidden = !ok; if (ok) hit++;
+        });
+        $$('.tbl-scroll', sec).forEach(function (w) {
+          var vis = $$('tbody tr', w).some(function (tr) { return !tr.hidden; });
+          w.hidden = !vis; var h = w.previousElementSibling; if (h && h.tagName === 'H3') h.hidden = !vis;
+        });
+        var other = !!q && !rows.length && PPI.norm(sec.textContent).indexOf(q) >= 0;
+        sec.hidden = !!q && !hit && !other && !head;
+        n += hit;
+      });
+      links.forEach(function (a) { var s = $(a.getAttribute('href')); a.parentNode.hidden = !!(s && s.hidden); });
+      cnt.textContent = q ? n + (n === 1 ? ' referência' : ' referências') + ' para "' + inp.value.trim() + '"' : initial;
+    }
+    inp.addEventListener('input', run);
+    var qs = new URLSearchParams(location.search).get('q'); if (qs) { inp.value = qs; run(); }
+  }
+
+  ({ home: home, 'learn-hub': hub, me: me, consult: consult, glossary: glossary, rh: rh }[page] || function () {})();
 })();

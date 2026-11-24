@@ -91,6 +91,7 @@ def header_html(base, active=None):
         f'<div class="dd"><button type="button" class="dd-b{" is-here" if active == "manuais" else ""}" aria-expanded="false" aria-controls="p-dd" data-nav="manuais">Manuais {svg("chev")}</button>'
         f'<div class="dd-m" id="p-dd">{mm}</div></div>'
         f'<a href="{base}checklists.html" data-nav="checklists"{cur("checklists")}>Checklists</a>'
+        f'<a href="{base}legislacao-rh.html" data-nav="rh"{cur("rh")}>Legislação de RH</a>'
         f'<a href="{base}meu-espaco.html" data-nav="meu"{cur("meu")}>Meu espaço</a>'
         f'</nav>'
         f'<div class="psearch" id="p-search"><form role="search" action="{base}consultar.html" method="get">{svg("search")}'
@@ -171,10 +172,11 @@ def page_index(ctx):
 <div class="cta"><a class="btn on-dark" href="aprender.html">Começar a aprender</a><a class="btn on-dark outline" href="checklists.html">Checklist mensal</a></div></div>
 <div class="hero-side"><h2>O que você procura?</h2><form role="search" action="consultar.html" method="get"><label class="sr-only" for="h-q">Buscar nos manuais</label><input id="h-q" name="q" type="search" placeholder="Ex.: rateio, adendo, conciliação"><button type="submit" aria-label="Buscar">Buscar</button></form><a class="cont-card" id="cont-card" href="#"><small>Continuar estudo</small><b></b></a></div>
 </div></section>
-<section class="sec-p" id="manuais"><div class="wrap"><header><h2>Escolha um manual</h2></header><div class="grid g3">
+<section class="sec-p" id="manuais"><div class="wrap"><header><h2>Escolha um manual</h2></header><div class="grid g4">
 <a class="card link tone c-m1" href="guias/guia-prestacao-de-contas.html"><h3>Rotina e documentos</h3><p>O que entregar, quando e para quem.</p><span>Abrir guia →</span></a>
 <a class="card link tone c-m2" href="guias/manual-das-ferramentas.html"><h3>Planilha e relatórios</h3><p>Preenchimento, conferência e correção de erros.</p><span>Abrir ferramentas →</span></a>
 <a class="card link tone c-m3" href="guias/base-normativa-pdi.html"><h3>Normas de PD&amp;I</h3><p>Regras e links para os textos oficiais.</p><span>Consultar normas →</span></a>
+<a class="card link tone c-m4" href="legislacao-rh.html"><h3>Legislação de RH</h3><p>Folha, encargos, eSocial, NRs e LGPD.</p><span>Abrir legislação →</span></a>
 </div><div id="fav-home" class="js-only" hidden style="margin-top:22px"><h3>Seus favoritos</h3><ul class="fav-list" id="fav-home-list"></ul></div></div></section>"""
     return shell('Portal PPI 4.0', 'Procedimentos, ferramentas e normas para prestação de contas.', body, page='home', scripts=('core.js', 'pages.js'))
 
@@ -426,6 +428,56 @@ def page_glossario(ctx):
 </div>'''
     return shell('Glossário', 'Glossário de siglas e termos da prestação de contas do PPI 4.0, com a seção de origem de cada definição.',
                  body, active='glossario', crumbs=[('Portal', 'index.html'), ('Glossário', None)], page='glossary', scripts=('core.js', 'pages.js'))
+
+
+# ------------------------------------------------------------------ legislação de RH
+def rh_table(head, rows, sub, sid, k):
+    th = ''.join(f'<th scope="col">{esc(h)}</th>' for h in head)
+    tr = ''.join(f'<tr><th scope="row">{esc(a)}</th><td>{esc(b)}</td></tr>' for a, b in rows)
+    cap = f'<h3 id="{sid}-t{k}">{esc(sub)}</h3>' if sub else ''
+    return f'{cap}<div class="tbl-scroll"><table class="rh-t"><thead><tr>{th}</tr></thead><tbody>{tr}</tbody></table></div>'
+
+
+def page_rh(ctx):
+    from rh import SECTIONS, PRIORITIES, PRIORITY_INTRO
+    nav, secs = '', ''
+    for s in SECTIONS:
+        nav += f'<li><a href="#{s["id"]}"><span class="mono">{s["n"]:02d}</span><span>{esc(s["title"])}</span></a></li>'
+        prio = '<span class="badge rh-prio">Prioridade no IKT</span>' if s.get('prio') else ''
+        body = f'<p class="muted">{esc(s["intro"])}</p>' if s.get('intro') else ''
+        body += ''.join(rh_table(h, r, sub, s['id'], k) for k, (h, r, sub) in enumerate(s['tables']))
+        for t, its in s.get('lists', []):
+            body += f'<h3>{esc(t)}</h3><ul class="rh-list">' + ''.join(f'<li>{esc(i)}</li>' for i in its) + '</ul>'
+        if s.get('note'):
+            body += f'<p class="rh-note">{esc(s["note"])}</p>'
+        if s.get('warn'):
+            body += f'<p class="disclaimer"><b>Atenção:</b> {esc(s["warn"])}</p>'
+        body += '<p class="rh-src"><span class="muted">Fonte oficial:</span> ' + ' · '.join(
+            f'<a href="{esc(u)}" target="_blank" rel="noopener">{esc(l)}</a>' for l, u in s['src']) + '</p>'
+        secs += (f'<section class="lesson rh-sec" id="{s["id"]}"><div class="rh-h"><span class="rh-n mono">{s["n"]:02d}</span>'
+                 f'<h2>{esc(s["title"])}</h2>{prio}</div>{body}</section>')
+    nav += '<li><a href="#prioridades"><span class="mono">13</span><span>Prioridades para o RH do IKT</span></a></li>'
+    pr = ''.join(
+        f'<div class="card rh-pc rh-{p["tone"]}"><div class="rh-pl"><span class="badge">{esc(p["level"])}</span><small>Prioridade {p["n"]}</small></div>'
+        f'<h3>{esc(p["title"])}</h3><ul class="rh-list">' + ''.join(f'<li>{esc(i)}</li>' for i in p['items']) + '</ul></div>'
+        for p in PRIORITIES)
+    secs += (f'<section class="lesson rh-sec" id="prioridades"><div class="rh-h"><span class="rh-n mono">13</span>'
+             f'<h2>Prioridades para o RH do IKT</h2></div><p class="muted">{esc(PRIORITY_INTRO)}</p><div class="grid g3">{pr}</div></section>')
+    total = sum(len(r) for s in SECTIONS for _, r, _ in s['tables'])
+    body = f'''
+<div class="page-head"><div class="wrap"><p class="eyebrow">Legislação de RH</p><h1>Normas trabalhistas, previdenciárias e de RH</h1>
+<p>Referência rápida das leis, decretos, portarias e normas regulamentadoras que sustentam admissão, folha, encargos, jornada, eSocial, saúde ocupacional e documentação de pessoal no IKT.</p></div></div>
+<div class="wrap layout2">
+  <nav class="side-nav" aria-label="Seções da legislação de RH"><b>Seções</b><ol>{nav}</ol></nav>
+  <div class="rh-main">
+    <div class="search-box"><label class="sr-only" for="rh-q">Filtrar normas</label><input id="rh-q" type="search" placeholder="Filtrar normas (ex.: FGTS, NR-07, S-1200, férias)" autocomplete="off"></div>
+    <p id="rh-count" class="muted" role="status" aria-live="polite">{total} referências em 12 temas.</p>
+    {secs}
+    <p class="disclaimer">Lista de referência para consulta. Confira sempre o texto vigente na fonte oficial, a convenção coletiva aplicável e os instrumentos de cada projeto. Este material não substitui parecer jurídico.</p>
+  </div>
+</div>'''
+    return shell('Legislação de RH', 'Legislação trabalhista, previdenciária, eSocial, normas regulamentadoras e LGPD aplicáveis ao RH do IKT.',
+                 body, active='rh', crumbs=[('Portal', 'index.html'), ('Legislação de RH', None)], page='rh', scripts=('core.js', 'pages.js'))
 
 
 # ------------------------------------------------------------------ meu espaço

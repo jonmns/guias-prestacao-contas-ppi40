@@ -15,7 +15,8 @@ Para desenvolvimento e publicação, prefira um servidor estático. Por exemplo,
 - Central de aprendizagem do manual das ferramentas.
 - Plataforma de aprendizagem PD&I, incluindo suas 18 aulas.
 - Navegação entre os manuais, favoritos e marcações por seção compatíveis com o portal.
-- Busca global regenerada, com 313 registros e inclusão das aulas PD&I.
+- Busca global regenerada, com 325 registros, incluindo as aulas PD&I e a Legislação de RH.
+- Aba **Legislação de RH** (`legislacao-rh.html`): 12 temas de legislação trabalhista, previdenciária, eSocial, NRs, LGPD e normas específicas do IKT, com filtro, links oficiais e prioridades. Conteúdo em `tools/rh.py`.
 - Painel com indicadores dos manuais e backup completo no Meu espaço.
 
 ## Recursos acrescentados

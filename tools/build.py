@@ -118,6 +118,11 @@ def main():
     for c in C.CHECKLISTS:
         items.append(dict(m='portal', s=c['id'], t=f'Checklist: {c["title"]}', p='Checklists', c=5, g=[],
                           x=c['sub'], u=f'checklists.html#{c["id"]}'))
+    from rh import SECTIONS as RH
+    for s in RH:
+        x = ' '.join(f'{a}: {b}.' for _, r, _ in s['tables'] for a, b in r) + ' ' + s.get('note', '')
+        items.append(dict(m='portal', s='rh-' + s['id'], t=s['title'], p='Legislação de RH', c=3, g=[], x=x[:6000],
+                          u=f'legislacao-rh.html#{s["id"]}'))
     # As aulas normativas também participam da busca global.
     import subprocess
     items += json.loads(subprocess.check_output(['node', str(ROOT / 'tools/index-pdi.cjs')], encoding='utf-8'))
@@ -135,6 +140,7 @@ def main():
     w('checklists.html', P.page_checklists(ctx, fechamento_groups(ROOT / MANUALS['ferramentas']['file'])))
     w('glossario.html', P.page_glossario(ctx))
     w('meu-espaco.html', P.page_meu(ctx))
+    w('legislacao-rh.html', P.page_rh(ctx))
     w('404.html', P.page_404())
     # Integração do painel completo deve persistir ao regenerar.
     page = ROOT / 'meu-espaco.html'
